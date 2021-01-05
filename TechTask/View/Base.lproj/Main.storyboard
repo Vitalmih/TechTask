@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Bfe-Wv-BwF">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
@@ -49,6 +49,10 @@
                                                 <constraint firstItem="BT5-Bc-jc4" firstAttribute="leading" secondItem="c5J-mA-uht" secondAttribute="leading" constant="10" id="wkc-PC-R6O"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="currencyType" destination="BT5-Bc-jc4" id="c23-fe-peT"/>
+                                            <outlet property="currencyValue" destination="PCU-av-8MR" id="VG7-XB-Hly"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
@@ -61,6 +65,9 @@
                                 <state key="normal" title="Button">
                                     <color key="titleColor" systemColor="labelColor"/>
                                 </state>
+                                <connections>
+                                    <action selector="converterButtonPressed:" destination="Bfe-Wv-BwF" eventType="touchUpInside" id="t01-P3-uQp"/>
+                                </connections>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="N1h-1b-mJ8"/>
@@ -75,10 +82,28 @@
                             <constraint firstItem="4hK-3g-fxd" firstAttribute="leading" secondItem="N1h-1b-mJ8" secondAttribute="leading" id="Oga-tD-5kv"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="currencyTableView" destination="4hK-3g-fxd" id="iNh-GY-A2m"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cYH-zb-Oqv" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-475.36231884057975" y="75"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="WCP-2v-DSp">
+            <objects>
+                <viewController id="yea-17-coe" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Uab-Ad-Lak">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="USD-RA-hZH"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="OIj-WL-Vj4" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="330" y="75"/>
         </scene>
     </scenes>
     <resources>
