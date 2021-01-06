@@ -7,28 +7,40 @@
 
 import UIKit
 
-class CurrenciesViewController: UIViewController {
+class CurrenciesViewController: UIViewController, CurrencyNetworkManagerProtocol, CurrencyNetworkManagerDelegate {
     
+    var dataTask: URLSessionDataTask?
+    var networkManager = CurrencyNetworkManager()
+    var currenciesArray: [CurrencyDataModel] = []
     @IBOutlet weak var currencyTableView: UITableView!
-    
-let networkManager = CurrencyNetworkManager()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        networkManager.delegate = self
         getData()
-        
     }
     
     @IBAction func converterButtonPressed(_ sender: UIButton) {
     }
     
-   
-
-    func getData() {
-        for i in K.typeOfCurrency {
-            networkManager.fetchCurrency(currency: i)
-        }
+    func fetchCurrency(currency: String) {
         
+    }
+    
+    func getData() {
+        for currencyType in currenciesArray {
+            fetchCurrency(currency: currencyType.validCode)
+        }
+    }
+    
+    func didGetCurrency(currencies: [CurrencyDataModel]) {
+        DispatchQueue.main.async {
+            self.currenciesArray = currencies
+            self.currencyTableView.reloadData()
+        }
+    }
+    
+    func didFailWithError(error: Error) {
+        print(error)
     }
 }

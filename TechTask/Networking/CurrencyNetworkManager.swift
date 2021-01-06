@@ -7,43 +7,51 @@
 
 import Foundation
 
-struct CurrencyNetworkManager {
+protocol CurrencyNetworkManagerProtocol {
+    var dataTask: URLSessionDataTask? { get set }
+    func fetchCurrency(currency: String)
+}
+
+protocol CurrencyNetworkManagerDelegate {
+    func didGetCurrency(currencies: [CurrencyDataModel])
+    func didFailWithError(error: Error)
+}
+
+class CurrencyNetworkManager: CurrencyNetworkManagerProtocol {
+    var dataTask: URLSessionDataTask?
+    var delegate: CurrencyNetworkManagerDelegate?
     
     func fetchCurrency(currency: String) {
-        
-            let urlString = ("\(K.currencyByValidCode)\(currency)")
-            performRequest(urlString: urlString)
-            print(urlString)
-        
+        let urlString = ("\(ConstansValue.currencyByValidCode)\(currency)")
+        performRequest(urlString: urlString)
     }
     
-    func performRequest(urlString: String) {
-        
+    private func performRequest(urlString: String) {
         if let url = URL(string: urlString) {
-            
             let session = URLSession(configuration: .default)
-            let task = session.dataTask(with: url) { (data, respone, error) in
-                
+            dataTask = session.dataTask(with: url) { (data, respone, error) in
                 if error != nil {
-                    print(error!)
+                    self.delegate?.didFailWithError(error: error!)
                 }
                 if let safeData = data {
                     self.parseJSON(data: safeData)
                 }
             }
-            task.resume() 
+            dataTask?.resume()
         }
     }
     
-    func parseJSON(data: Data) {
+    private func parseJSON(data: Data) {
         let decoder = JSONDecoder()
-        
+        var currencyArray: [CurrencyDataModel] = []
         do {
-           let decodedData = try decoder.decode([CurrencyDataModel].self, from: data)
-            print(decodedData)
+            let decodedData = try decoder.decode([CurrencyDataModel].self, from: data)
+            for currency in decodedData {
+                currencyArray.append(currency)
+            }
+            delegate?.didGetCurrency(currencies: currencyArray)
         } catch {
-            print(error)
+            delegate?.didFailWithError(error: error)
         }
-        
     }
 }
