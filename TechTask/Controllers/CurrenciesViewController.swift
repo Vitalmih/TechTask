@@ -7,9 +7,9 @@
 
 import UIKit
 
-class CurrenciesViewController: UIViewController, CurrencyNetworkManagerProtocol, CurrencyNetworkManagerDelegate {
+class CurrenciesViewController: UIViewController {
     
-    var dataTask: URLSessionDataTask?
+    
     var networkManager = CurrencyNetworkManager()
     var currenciesArray: [CurrencyDataModel] = []
     @IBOutlet weak var currencyTableView: UITableView!
@@ -18,22 +18,25 @@ class CurrenciesViewController: UIViewController, CurrencyNetworkManagerProtocol
         super.viewDidLoad()
         networkManager.delegate = self
         getData()
+        networkManager.dispatchGroup.notify(queue: .main) {
+            print("done")
+        }
     }
     
     @IBAction func converterButtonPressed(_ sender: UIButton) {
     }
     
-    func fetchCurrency(currency: String) {
-        
-    }
-    
     func getData() {
-        for currencyType in currenciesArray {
-            fetchCurrency(currency: currencyType.validCode)
+        for type in ConstansValue.typeOfCurrency {
+            self.networkManager.fetchCurrency(currency: type)
         }
     }
-    
+}
+
+//MARK: - CurrencyNetworkManagerDelegate
+extension CurrenciesViewController: CurrencyNetworkManagerDelegate {
     func didGetCurrency(currencies: [CurrencyDataModel]) {
+        print("PROTOCOL ===== \(currencies)")
         DispatchQueue.main.async {
             self.currenciesArray = currencies
             self.currencyTableView.reloadData()
@@ -44,3 +47,20 @@ class CurrenciesViewController: UIViewController, CurrencyNetworkManagerProtocol
         print(error)
     }
 }
+
+//MARK: - TableViewDataSource and Delegate
+extension CurrenciesViewController: UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        currenciesArray.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: ConstansValue.cellIdentifier, for: indexPath) as! CurrencyTableViewCell
+        let currency = currenciesArray[indexPath.row]
+        cell.currencyType.text = currency.currencyName
+        cell.currencyValue.text = String(currency.rate)
+        
+        return cell
+    }
+}
+

@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		5E32327825A4973700CF6BB7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E32327725A4973700CF6BB7 /* AppDelegate.swift */; };
 		5E32327A25A4973700CF6BB7 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E32327925A4973700CF6BB7 /* SceneDelegate.swift */; };
-		5E32327F25A4973700CF6BB7 /* Currencies.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5E32327D25A4973700CF6BB7 /* Currencies.storyboard */; };
+		5E32327F25A4973700CF6BB7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5E32327D25A4973700CF6BB7 /* Main.storyboard */; };
 		5E32328125A4973800CF6BB7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5E32328025A4973800CF6BB7 /* Assets.xcassets */; };
 		5E32328425A4973800CF6BB7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5E32328225A4973800CF6BB7 /* LaunchScreen.storyboard */; };
 		5E32329125A49C0500CF6BB7 /* CurrenciesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E32329025A49C0500CF6BB7 /* CurrenciesViewController.swift */; };
@@ -25,7 +25,7 @@
 		5E32327425A4973700CF6BB7 /* TechTask.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TechTask.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5E32327725A4973700CF6BB7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5E32327925A4973700CF6BB7 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		5E32327E25A4973700CF6BB7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Currencies.storyboard; sourceTree = "<group>"; };
+		5E32327E25A4973700CF6BB7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		5E32328025A4973800CF6BB7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5E32328325A4973800CF6BB7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		5E32328525A4973800CF6BB7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -86,7 +86,7 @@
 			isa = PBXGroup;
 			children = (
 				5E32328225A4973800CF6BB7 /* LaunchScreen.storyboard */,
-				5E32327D25A4973700CF6BB7 /* Currencies.storyboard */,
+				5E32327D25A4973700CF6BB7 /* Main.storyboard */,
 				5E7ABB3625A60127003A2915 /* Converter.storyboard */,
 			);
 			path = View;
@@ -184,7 +184,7 @@
 			files = (
 				5E32328425A4973800CF6BB7 /* LaunchScreen.storyboard in Resources */,
 				5E32328125A4973800CF6BB7 /* Assets.xcassets in Resources */,
-				5E32327F25A4973700CF6BB7 /* Currencies.storyboard in Resources */,
+				5E32327F25A4973700CF6BB7 /* Main.storyboard in Resources */,
 				5E7ABB3725A60127003A2915 /* Converter.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -210,12 +210,12 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		5E32327D25A4973700CF6BB7 /* Currencies.storyboard */ = {
+		5E32327D25A4973700CF6BB7 /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
 				5E32327E25A4973700CF6BB7 /* Base */,
 			);
-			name = Currencies.storyboard;
+			name = Main.storyboard;
 			sourceTree = "<group>";
 		};
 		5E32328225A4973800CF6BB7 /* LaunchScreen.storyboard */ = {
