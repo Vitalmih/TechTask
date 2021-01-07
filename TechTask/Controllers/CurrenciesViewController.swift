@@ -10,6 +10,7 @@ import UIKit
 class CurrenciesViewController: UIViewController {
     
     var networkManager = CurrencyNetworkManager()
+    var currenciesArrayForCurrencies: [CurrencyDataModel] = []
     var currenciesArray: [CurrencyDataModel] = []
     @IBOutlet weak var currencyTableView: UITableView!
     
@@ -21,27 +22,26 @@ class CurrenciesViewController: UIViewController {
     
     @IBAction func converterButtonPressed(_ sender: UIButton) {
         let storyboard = UIStoryboard(name: "Converter", bundle: nil)
-        let vc = storyboard.instantiateViewController(withIdentifier: "Converter")
-        show(vc, sender: self)
+        let vc = storyboard.instantiateViewController(withIdentifier: "Converter") as! ConverterViewController
+        vc.currenciesArray = currenciesArray
+        show(vc, sender: nil)
     }
     
     func getData() {
-        
         self.networkManager.fetchCurrency(currency: ConstansValue.allCurrenciesJSON)
-        
     }
 }
 
 //MARK: - CurrencyNetworkManagerDelegate
 extension CurrenciesViewController: CurrencyNetworkManagerDelegate {
     func didGetCurrency(currencies: [CurrencyDataModel]) {
-        print("PROTOCOL ===== \(currencies)")
-        
+    
         DispatchQueue.main.async {
+            self.currenciesArray = currencies
             for i in ConstansValue.typeOfCurrency {
                 for currencyType in currencies {
                     if currencyType.validCode == i {
-                        self.currenciesArray.append(currencyType)
+                        self.currenciesArrayForCurrencies.append(currencyType)
                     }
                 }
             }
@@ -58,12 +58,12 @@ extension CurrenciesViewController: CurrencyNetworkManagerDelegate {
 extension CurrenciesViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        currenciesArray.count
+        currenciesArrayForCurrencies.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: ConstansValue.cellIdentifier, for: indexPath) as! CurrencyTableViewCell
-        let currency = currenciesArray[indexPath.row]
+        let currency = currenciesArrayForCurrencies[indexPath.row]
         cell.currencyType.text = currency.currencyName
         cell.currencyValue.text = String(currency.rate)
         return cell
