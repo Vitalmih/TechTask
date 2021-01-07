@@ -9,6 +9,13 @@ import UIKit
 
 class ConverterViewController: UIViewController {
     
+    @IBOutlet weak var currencyType: UILabel!
+    @IBOutlet weak var convertedCurrencyType: UILabel!
+    @IBOutlet weak var currencyPicker: UIPickerView!
+    @IBOutlet weak var multiplicityCurrencyTF: UITextField!
+    @IBOutlet weak var resultCurrencyTF: UITextField!
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
     }

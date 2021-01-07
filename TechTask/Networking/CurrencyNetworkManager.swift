@@ -23,10 +23,8 @@ class CurrencyNetworkManager: CurrencyNetworkManagerProtocol {
     let dispatchGroup = DispatchGroup()
     
     func fetchCurrency(currency: String) {
-        dispatchGroup.enter()
-        let urlString = ("\(ConstansValue.currencyByValidCode)\(currency)")
+        let urlString = ("\(currency)")
         performRequest(urlString: urlString)
-        dispatchGroup.leave()
         print(urlString)
     }
     
@@ -39,7 +37,6 @@ class CurrencyNetworkManager: CurrencyNetworkManagerProtocol {
                 }
                 if let safeData = data {
                     self.parseJSON(data: safeData)
-                 
                 }
             }
             dataTask?.resume()
@@ -47,19 +44,15 @@ class CurrencyNetworkManager: CurrencyNetworkManagerProtocol {
     }
     
     private func parseJSON(data: Data) {
-        
-        print("Enter")
         let decoder = JSONDecoder()
-
         do {
-            let decodedData = try decoder.decode([CurrencyDataModel].self, from: data)
             var currencyArray: [CurrencyDataModel] = []
+            let decodedData = try decoder.decode([CurrencyDataModel].self, from: data)
             for currency in decodedData {
                 currencyArray.append(currency)
                 print("NETWORK ====== \(currency.validCode)")
-                print("Leave")
             }
-                self.delegate?.didGetCurrency(currencies: currencyArray)
+            self.delegate?.didGetCurrency(currencies: currencyArray)
         } catch {
             delegate?.didFailWithError(error: error)
         }
