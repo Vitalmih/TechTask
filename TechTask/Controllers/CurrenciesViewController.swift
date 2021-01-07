@@ -35,7 +35,6 @@ class CurrenciesViewController: UIViewController {
 //MARK: - CurrencyNetworkManagerDelegate
 extension CurrenciesViewController: CurrencyNetworkManagerDelegate {
     func didGetCurrency(currencies: [CurrencyDataModel]) {
-    
         DispatchQueue.main.async {
             self.currenciesArray = currencies
             for i in ConstansValue.typeOfCurrency {
@@ -64,8 +63,11 @@ extension CurrenciesViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: ConstansValue.cellIdentifier, for: indexPath) as! CurrencyTableViewCell
         let currency = currenciesArrayForCurrencies[indexPath.row]
+        var formatedTotalNumberString: String {
+            return String(format: "%.2f", currency.rate)
+        }
         cell.currencyType.text = currency.currencyName
-        cell.currencyValue.text = String(currency.rate)
+        cell.currencyValue.text = formatedTotalNumberString
         return cell
     }
 }

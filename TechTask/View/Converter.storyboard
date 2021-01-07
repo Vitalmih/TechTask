@@ -19,16 +19,19 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AsW-8h-8nF">
                                 <rect key="frame" x="20" y="372" width="374" height="40"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xJT-Pu-wYp">
-                                        <rect key="frame" x="0.0" y="0.0" width="0.0" height="40"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="AUD" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xJT-Pu-wYp">
+                                        <rect key="frame" x="0.0" y="0.0" width="35" height="40"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="35" id="a0F-md-ZUf"/>
+                                        </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="bezel" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="C8j-ND-XYH">
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" textAlignment="center" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="C8j-ND-XYH">
                                         <rect key="frame" x="304" y="3" width="70" height="34"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="70" id="L7v-83-tH5"/>
+                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="70" id="L7v-83-tH5"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
@@ -45,6 +48,7 @@
                                     <constraint firstItem="C8j-ND-XYH" firstAttribute="top" secondItem="AsW-8h-8nF" secondAttribute="top" constant="3" id="RZ1-4y-bjj"/>
                                     <constraint firstItem="xJT-Pu-wYp" firstAttribute="leading" secondItem="AsW-8h-8nF" secondAttribute="leading" id="Vz1-eD-Vay"/>
                                     <constraint firstAttribute="bottom" secondItem="xJT-Pu-wYp" secondAttribute="bottom" id="baY-KY-LBL"/>
+                                    <constraint firstItem="C8j-ND-XYH" firstAttribute="leading" relation="lessThanOrEqual" secondItem="xJT-Pu-wYp" secondAttribute="trailing" constant="269" id="nnu-7e-39G"/>
                                     <constraint firstAttribute="trailing" secondItem="C8j-ND-XYH" secondAttribute="trailing" id="v5e-8H-1uk"/>
                                 </constraints>
                             </view>
@@ -58,16 +62,16 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vEj-3q-wmG">
                                 <rect key="frame" x="20" y="54" width="374" height="40"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="s99-cz-qr4">
-                                        <rect key="frame" x="0.0" y="0.0" width="0.0" height="40"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="AUD" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="s99-cz-qr4">
+                                        <rect key="frame" x="0.0" y="0.0" width="35" height="40"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="bezel" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="khD-JZ-Y6G">
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="khD-JZ-Y6G">
                                         <rect key="frame" x="304" y="3" width="70" height="34"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="70" id="sd7-Zm-NHL"/>
+                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="70" id="sd7-Zm-NHL"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
@@ -80,6 +84,7 @@
                                 <constraints>
                                     <constraint firstAttribute="bottom" secondItem="khD-JZ-Y6G" secondAttribute="bottom" constant="3" id="6df-ht-JOw"/>
                                     <constraint firstAttribute="height" constant="40" id="C8i-5f-es4"/>
+                                    <constraint firstItem="khD-JZ-Y6G" firstAttribute="leading" relation="lessThanOrEqual" secondItem="s99-cz-qr4" secondAttribute="trailing" constant="269" id="ELl-oL-FKb"/>
                                     <constraint firstItem="s99-cz-qr4" firstAttribute="top" secondItem="vEj-3q-wmG" secondAttribute="top" id="Iwz-Uv-NfQ"/>
                                     <constraint firstAttribute="bottom" secondItem="s99-cz-qr4" secondAttribute="bottom" id="QIZ-R4-1hJ"/>
                                     <constraint firstAttribute="trailing" secondItem="khD-JZ-Y6G" secondAttribute="trailing" id="Qrn-M9-dFG"/>

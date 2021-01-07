@@ -20,7 +20,7 @@ protocol CurrencyNetworkManagerDelegate {
 class CurrencyNetworkManager: CurrencyNetworkManagerProtocol {
     var dataTask: URLSessionDataTask?
     var delegate: CurrencyNetworkManagerDelegate?
-        
+    
     func fetchCurrency(currency: String) {
         let urlString = ("\(currency)")
         performRequest(urlString: urlString)
