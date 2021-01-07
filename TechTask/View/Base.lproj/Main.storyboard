@@ -21,20 +21,20 @@
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="CurrencyTableViewCell" id="5Dd-Bb-e6z" customClass="CurrencyTableViewCell" customModule="TechTask" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="414" height="43.5"/>
+                                        <rect key="frame" x="0.0" y="28" width="414" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="5Dd-Bb-e6z" id="c5J-mA-uht">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="USD" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BT5-Bc-jc4">
-                                                    <rect key="frame" x="10" y="11" width="34.5" height="21"/>
+                                                    <rect key="frame" x="10" y="11" width="34.5" height="21.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="28" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PCU-av-8MR">
-                                                    <rect key="frame" x="383.5" y="11" width="20.5" height="21"/>
+                                                    <rect key="frame" x="383.5" y="11" width="20.5" height="21.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -43,6 +43,7 @@
                                             <constraints>
                                                 <constraint firstAttribute="bottom" secondItem="PCU-av-8MR" secondAttribute="bottom" constant="11.5" id="68b-EQ-bKL"/>
                                                 <constraint firstAttribute="trailing" secondItem="PCU-av-8MR" secondAttribute="trailing" constant="10" id="H3p-bk-2Rc"/>
+                                                <constraint firstItem="PCU-av-8MR" firstAttribute="leading" relation="lessThanOrEqual" secondItem="BT5-Bc-jc4" secondAttribute="trailing" constant="339" id="Hvq-It-7Rr"/>
                                                 <constraint firstAttribute="bottom" secondItem="BT5-Bc-jc4" secondAttribute="bottom" constant="11.5" id="kCz-Ky-VVe"/>
                                                 <constraint firstItem="BT5-Bc-jc4" firstAttribute="top" secondItem="c5J-mA-uht" secondAttribute="top" constant="11" id="kc3-6u-H46"/>
                                                 <constraint firstItem="PCU-av-8MR" firstAttribute="top" secondItem="c5J-mA-uht" secondAttribute="top" constant="11" id="s6p-cZ-gyC"/>

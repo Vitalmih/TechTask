@@ -18,7 +18,7 @@ class ConverterViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        self.hideKeyboardWhenTappedAround()
     }
 }
 
@@ -65,4 +65,22 @@ extension ConverterViewController: UIPickerViewDelegate {
 //MARK: - UITextFieldDelegate
 extension ConverterViewController: UITextFieldDelegate {
     
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        guard let numberString = multiplicityCurrencyTF.text else { return }
+        let myNumber = Int(numberString) ?? 0
+        
+//        resultCurrencyTF.text = multiplicityCount
+    }
+}
+
+//MARK: - Hide keyboard
+extension UIViewController {
+    func hideKeyboardWhenTappedAround() {
+        let tap = UITapGestureRecognizer(target: self, action: #selector(UIViewController.dismissKeyboard))
+        tap.cancelsTouchesInView = false
+        view.addGestureRecognizer(tap)
+    }
+    @objc func dismissKeyboard() {
+        view.endEditing(true)
+    }
 }
