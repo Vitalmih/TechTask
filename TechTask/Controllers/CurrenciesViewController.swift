@@ -8,10 +8,10 @@
 import UIKit
 
 class CurrenciesViewController: UIViewController {
-   
+    
     @IBOutlet weak var currencyTableView: UITableView!
     var networkManager = CurrencyNetworkManager()
-    var currenciesArrayForCurrencies: [CurrencyDataModel] = []
+    var currenciesArrayForCurrenciesScreen: [CurrencyDataModel] = []
     var currenciesArray: [CurrencyDataModel] = []
     
     override func viewDidLoad() {
@@ -40,7 +40,7 @@ extension CurrenciesViewController: CurrencyNetworkManagerDelegate {
             for i in ConstansValue.typeOfCurrency {
                 for currencyType in currencies {
                     if currencyType.validCode == i {
-                        self.currenciesArrayForCurrencies.append(currencyType)
+                        self.currenciesArrayForCurrenciesScreen.append(currencyType)
                     }
                 }
             }
@@ -56,19 +56,16 @@ extension CurrenciesViewController: CurrencyNetworkManagerDelegate {
 //MARK: - TableViewDataSource and Delegate
 extension CurrenciesViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
-        currenciesArrayForCurrencies.count
+        currenciesArrayForCurrenciesScreen.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: ConstansValue.cellIdentifier, for: indexPath) as! CurrencyTableViewCell
-        let currency = currenciesArrayForCurrencies[indexPath.row]
+        let currency = currenciesArrayForCurrenciesScreen[indexPath.row]
         var formatedTotalNumberString: String {
             return String(format: "%.2f", currency.rate)
         }
-        cell.currencyType.text = currency.currencyName
-        cell.currencyValue.text = formatedTotalNumberString
+        cell.configureCell(currency.currencyName, formatedTotalNumberString)
         return cell
     }
 }
-

@@ -37,16 +37,16 @@ extension ConverterViewController: UIPickerViewDataSource {
 //MARK: - UIPickerViewDelegate
 extension ConverterViewController: UIPickerViewDelegate {
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        let code = currenciesArray[row]
+        let CurrencyCode = currenciesArray[row]
         switch component {
         case 0:
-            self.leftComponentRate = code.rate
+            self.leftComponentRate = CurrencyCode.rate
         case 1:
-            self.rightComponentRate = code.rate
+            self.rightComponentRate = CurrencyCode.rate
         default:
             break
         }
-        return code.validCode
+        return CurrencyCode.validCode
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
@@ -61,7 +61,6 @@ extension ConverterViewController: UIPickerViewDelegate {
                 }
             } else {
                 self.currencyType.text = name.validCode
-                self.leftComponentRate = name.rate
                 calculateCurrencyRate()
             }
         case 1:
@@ -73,7 +72,6 @@ extension ConverterViewController: UIPickerViewDelegate {
                 }
             } else {
                 self.convertedCurrencyType.text = name.validCode
-                self.rightComponentRate = name.rate
                 calculateCurrencyRate()
             }
         default:
@@ -100,7 +98,6 @@ extension ConverterViewController: UITextFieldDelegate {
     func textFieldDidEndEditing(_ textField: UITextField) {
         calculateCurrencyRate()
     }
-    
     //    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
     //        resultCurrencyTF.text = textField.text
     //        return true

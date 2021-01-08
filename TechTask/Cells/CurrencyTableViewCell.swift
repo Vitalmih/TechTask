@@ -8,11 +8,15 @@
 import UIKit
 
 class CurrencyTableViewCell: UITableViewCell {
-
+    
     @IBOutlet weak var currencyType: UILabel!
     @IBOutlet weak var currencyValue: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
+    }
+    func configureCell(_ currencyType: String, _ currencyValue: String) {
+        self.currencyType.text = currencyType
+        self.currencyValue.text = currencyValue
     }
 }
