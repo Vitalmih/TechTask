@@ -8,11 +8,11 @@
 import UIKit
 
 class CurrenciesViewController: UIViewController {
-    
+   
+    @IBOutlet weak var currencyTableView: UITableView!
     var networkManager = CurrencyNetworkManager()
     var currenciesArrayForCurrencies: [CurrencyDataModel] = []
     var currenciesArray: [CurrencyDataModel] = []
-    @IBOutlet weak var currencyTableView: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()

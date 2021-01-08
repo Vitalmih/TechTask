@@ -8,15 +8,15 @@
 import UIKit
 
 class ConverterViewController: UIViewController {
-    var networkManager = CurrencyNetworkManager()
-    var currenciesArray: [CurrencyDataModel] = []
-    private var leftComponentRate: Double = 0.0
-    private var rightComponentRate: Double = 0.0
+    
     @IBOutlet weak var currencyType: UILabel!
     @IBOutlet weak var convertedCurrencyType: UILabel!
     @IBOutlet weak var currencyPicker: UIPickerView!
     @IBOutlet weak var multiplicityCurrencyTF: UITextField!
     @IBOutlet weak var resultCurrencyTF: UITextField!
+    var currenciesArray: [CurrencyDataModel] = []
+    private var leftComponentRate: Double = 0.0
+    private var rightComponentRate: Double = 0.0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,6 +38,14 @@ extension ConverterViewController: UIPickerViewDataSource {
 extension ConverterViewController: UIPickerViewDelegate {
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         let code = currenciesArray[row]
+        switch component {
+        case 0:
+            self.leftComponentRate = code.rate
+        case 1:
+            self.rightComponentRate = code.rate
+        default:
+            break
+        }
         return code.validCode
     }
     
@@ -46,19 +54,43 @@ extension ConverterViewController: UIPickerViewDelegate {
         switch component {
         case 0:
             if pickerView.selectedRow(inComponent: 0) == pickerView.selectedRow(inComponent: 1) {
-                pickerView.selectRow(0, inComponent: 0, animated: true)
+                if currenciesArray[row].validCode == currenciesArray[row].validCode && row == 0 {
+                    pickerView.selectRow(row + 1, inComponent: 0, animated: true)
+                } else {
+                    pickerView.selectRow(row - 1, inComponent: 0, animated: true)
+                }
+            } else {
+                self.currencyType.text = name.validCode
+                self.leftComponentRate = name.rate
+                calculateCurrencyRate()
             }
-            self.currencyType.text = name.validCode
-            self.leftComponentRate = name.rate
-            self.resultCurrencyTF.reloadInputViews()
         case 1:
-            if pickerView.selectedRow(inComponent: 1) == pickerView.selectedRow(inComponent: 0) {
-                pickerView.selectRow(0, inComponent: 1, animated: true)
+            if pickerView.selectedRow(inComponent: 0) == pickerView.selectedRow(inComponent: 1) {
+                if currenciesArray[row].validCode == currenciesArray[row].validCode && row == 0 {
+                    pickerView.selectRow(row + 1, inComponent: 1, animated: true)
+                } else {
+                    pickerView.selectRow(row - 1, inComponent: 1, animated: true)
+                }
+            } else {
+                self.convertedCurrencyType.text = name.validCode
+                self.rightComponentRate = name.rate
+                calculateCurrencyRate()
             }
-            self.convertedCurrencyType.text = name.validCode
-            self.rightComponentRate = name.rate
         default:
             break
+        }
+    }
+    
+    func calculateCurrencyRate() {
+        if multiplicityCurrencyTF.text != "" && currencyType.text != convertedCurrencyType.text {
+            guard let numberString = multiplicityCurrencyTF.text else { return }
+            let convertNumberStringToDouble = Double(numberString) ?? 0.0
+            let buffer = convertNumberStringToDouble * self.leftComponentRate
+            let totalNumber = buffer / rightComponentRate
+            var formatedTotalNumberString: String {
+                return String(format: "%.2f", totalNumber)
+            }
+            resultCurrencyTF.text = formatedTotalNumberString
         }
     }
 }
@@ -66,20 +98,13 @@ extension ConverterViewController: UIPickerViewDelegate {
 //MARK: - UITextFieldDelegate
 extension ConverterViewController: UITextFieldDelegate {
     func textFieldDidEndEditing(_ textField: UITextField) {
-        guard let numberString = multiplicityCurrencyTF.text else { return }
-        let convertNumberStringToDouble = Double(numberString) ?? 0.0
-        let buffer = convertNumberStringToDouble * self.leftComponentRate
-        let totalNumber = buffer / rightComponentRate
-        var formatedTotalNumberString: String {
-            return String(format: "%.2f", totalNumber)
-        }
-        resultCurrencyTF.text = formatedTotalNumberString
+        calculateCurrencyRate()
     }
     
-//    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-//        resultCurrencyTF.text = textField.text
-//        return true
-//    }
+    //    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+    //        resultCurrencyTF.text = textField.text
+    //        return true
+    //    }
 }
 
 //MARK: - Hide keyboard
