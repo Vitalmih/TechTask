@@ -8,8 +8,10 @@
 import Foundation
 
 protocol CurrencyNetworkManagerProtocol {
-    var dataTask: URLSessionDataTask? { get set }
-    func fetchCurrency(currency: String)
+    var dataTask: URLSessionDataTask? { get }
+    var delegate: CurrencyNetworkManagerDelegate? { get set }
+    
+    func fetchCurrency()
 }
 
 protocol CurrencyNetworkManagerDelegate {
@@ -20,11 +22,10 @@ protocol CurrencyNetworkManagerDelegate {
 class CurrencyNetworkManager: CurrencyNetworkManagerProtocol {
     var dataTask: URLSessionDataTask?
     var delegate: CurrencyNetworkManagerDelegate?
+    private let allCurrenciesLink = "https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange?json"
     
-    func fetchCurrency(currency: String) {
-        let urlString = ("\(currency)")
-        performRequest(urlString: urlString)
-        print(urlString)
+    func fetchCurrency() {
+        performRequest(urlString: allCurrenciesLink)
     }
     
     private func performRequest(urlString: String) {

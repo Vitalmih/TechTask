@@ -11,6 +11,7 @@ class CurrencyTableViewCell: UITableViewCell {
     
     @IBOutlet weak var currencyType: UILabel!
     @IBOutlet weak var currencyValue: UILabel!
+    static let cellIdentifier = "CurrencyTableViewCell"
     
     override func awakeFromNib() {
         super.awakeFromNib()
