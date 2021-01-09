@@ -61,7 +61,7 @@ extension ConverterViewController: UIPickerViewDelegate {
                 }
             } else {
                 self.currencyType.text = name.validCode
-                calculateCurrencyRate()
+                calculateCurrencyRate(textField: multiplicityCurrencyTF)
             }
         case 1:
             if pickerView.selectedRow(inComponent: 0) == pickerView.selectedRow(inComponent: 1) {
@@ -72,23 +72,36 @@ extension ConverterViewController: UIPickerViewDelegate {
                 }
             } else {
                 self.convertedCurrencyType.text = name.validCode
-                calculateCurrencyRate()
+                calculateCurrencyRate(textField: resultCurrencyTF)
             }
         default:
             break
         }
     }
     
-    func calculateCurrencyRate() {
-        if multiplicityCurrencyTF.text != "" && currencyType.text != convertedCurrencyType.text {
-            guard let numberString = multiplicityCurrencyTF.text else { return }
-            let convertNumberStringToDouble = Double(numberString) ?? 0.0
-            let buffer = convertNumberStringToDouble * self.leftComponentRate
-            let totalNumber = buffer / rightComponentRate
-            var formatedTotalNumberString: String {
-                return String(format: "%.2f", totalNumber)
+    func calculateCurrencyRate(textField: UITextField) {
+        if textField == multiplicityCurrencyTF {
+            if multiplicityCurrencyTF.text != "" && currencyType.text != convertedCurrencyType.text {
+                guard let numberString = multiplicityCurrencyTF.text else { return }
+                let convertNumberStringToDouble = Double(numberString) ?? 0.0
+                let buffer = convertNumberStringToDouble * self.leftComponentRate
+                let totalNumber = buffer / rightComponentRate
+                var formatedTotalNumberString: String {
+                    return String(format: "%.2f", totalNumber)
+                }
+                resultCurrencyTF.text = formatedTotalNumberString
             }
-            resultCurrencyTF.text = formatedTotalNumberString
+        } else if textField == resultCurrencyTF {
+            if resultCurrencyTF.text != "" && currencyType.text != convertedCurrencyType.text {
+                guard let numberString = resultCurrencyTF.text else { return }
+                let convertNumberStringToDouble = Double(numberString) ?? 0.0
+                let buffer = convertNumberStringToDouble * self.rightComponentRate
+                let totalNumber = buffer / leftComponentRate
+                var formatedTotalNumberString: String {
+                    return String(format: "%.2f", totalNumber)
+                }
+                multiplicityCurrencyTF.text = formatedTotalNumberString
+            }
         }
     }
 }
@@ -96,12 +109,12 @@ extension ConverterViewController: UIPickerViewDelegate {
 //MARK: - UITextFieldDelegate
 extension ConverterViewController: UITextFieldDelegate {
     func textFieldDidEndEditing(_ textField: UITextField) {
-        calculateCurrencyRate()
+        calculateCurrencyRate(textField: textField)
     }
-    //    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-    //        resultCurrencyTF.text = textField.text
-    //        return true
-    //    }
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        resultCurrencyTF.text = textField.text
+        return true
+    }
 }
 
 //MARK: - Hide keyboard
