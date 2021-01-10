@@ -14,13 +14,21 @@ class ConverterViewController: UIViewController {
     @IBOutlet weak var currencyPicker: UIPickerView!
     @IBOutlet weak var multiplicityCurrencyTF: UITextField!
     @IBOutlet weak var resultCurrencyTF: UITextField!
+    
     var currenciesArray: [CurrencyDataModel] = []
+    
     private var leftComponentRate: Double = 0.0
     private var rightComponentRate: Double = 0.0
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.hideKeyboardWhenTappedAround()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        currencyPicker.selectRow(1, inComponent: 1, animated: true)
+        currencyPicker.delegate?.pickerView?(currencyPicker, didSelectRow: 1, inComponent: 1)
     }
 }
 
@@ -29,6 +37,7 @@ extension ConverterViewController: UIPickerViewDataSource {
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 2
     }
+    
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         return currenciesArray.count
     }
@@ -50,33 +59,19 @@ extension ConverterViewController: UIPickerViewDelegate {
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        let name = currenciesArray[row]
-        switch component {
-        case 0:
-            if pickerView.selectedRow(inComponent: 0) == pickerView.selectedRow(inComponent: 1) {
-                if currenciesArray[row].validCode == currenciesArray[row].validCode && row == 0 {
-                    pickerView.selectRow(row + 1, inComponent: 0, animated: true)
-                } else {
-                    pickerView.selectRow(row - 1, inComponent: 0, animated: true)
-                }
+        let selectedInputField = component == 0 ? currencyType : convertedCurrencyType
+        let requiredTextField: UITextField = component == 0 ? multiplicityCurrencyTF : resultCurrencyTF
+        
+        if pickerView.selectedRow(inComponent: 0) == pickerView.selectedRow(inComponent: 1) {
+            if currenciesArray[row].validCode == currenciesArray[row].validCode && row == 0 {
+                pickerView.selectRow(row + 1, inComponent: component, animated: true)
             } else {
-                self.currencyType.text = name.validCode
-                calculateCurrencyRate(textField: multiplicityCurrencyTF)
+                pickerView.selectRow(row - 1, inComponent: component, animated: true)
             }
-        case 1:
-            if pickerView.selectedRow(inComponent: 0) == pickerView.selectedRow(inComponent: 1) {
-                if currenciesArray[row].validCode == currenciesArray[row].validCode && row == 0 {
-                    pickerView.selectRow(row + 1, inComponent: 1, animated: true)
-                } else {
-                    pickerView.selectRow(row - 1, inComponent: 1, animated: true)
-                }
-            } else {
-                self.convertedCurrencyType.text = name.validCode
-                calculateCurrencyRate(textField: resultCurrencyTF)
-            }
-        default:
-            break
+            return
         }
+        selectedInputField?.text = currenciesArray[row].validCode
+        calculateCurrencyRate(textField: requiredTextField)
     }
     
     func calculateCurrencyRate(textField: UITextField) {
@@ -86,9 +81,7 @@ extension ConverterViewController: UIPickerViewDelegate {
                 let convertNumberStringToDouble = Double(numberString) ?? 0.0
                 let buffer = convertNumberStringToDouble * self.leftComponentRate
                 let totalNumber = buffer / rightComponentRate
-                var formatedTotalNumberString: String {
-                    return String(format: "%.2f", totalNumber)
-                }
+                let formatedTotalNumberString = String(format: "%.2f", totalNumber)
                 resultCurrencyTF.text = formatedTotalNumberString
             }
         } else if textField == resultCurrencyTF {
@@ -97,9 +90,7 @@ extension ConverterViewController: UIPickerViewDelegate {
                 let convertNumberStringToDouble = Double(numberString) ?? 0.0
                 let buffer = convertNumberStringToDouble * self.rightComponentRate
                 let totalNumber = buffer / leftComponentRate
-                var formatedTotalNumberString: String {
-                    return String(format: "%.2f", totalNumber)
-                }
+                let formatedTotalNumberString = String(format: "%.2f", totalNumber)
                 multiplicityCurrencyTF.text = formatedTotalNumberString
             }
         }
@@ -108,11 +99,14 @@ extension ConverterViewController: UIPickerViewDelegate {
 
 //MARK: - UITextFieldDelegate
 extension ConverterViewController: UITextFieldDelegate {
-    func textFieldDidEndEditing(_ textField: UITextField) {
-        calculateCurrencyRate(textField: textField)
-    }
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        resultCurrencyTF.text = textField.text
+        
+        if let count = textField.text?.count {
+            if count >= 10 {
+                return false
+            }
+        }
+        calculateCurrencyRate(textField: textField)
         return true
     }
 }

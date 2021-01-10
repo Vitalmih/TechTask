@@ -52,7 +52,9 @@ class CurrencyNetworkManager: CurrencyNetworkManagerProtocol {
                 currencyArray.append(currency)
                 print("NETWORK ====== \(currency.validCode)")
             }
-            self.delegate?.didGetCurrency(currencies: currencyArray)
+            DispatchQueue.main.async {
+                self.delegate?.didGetCurrency(currencies: currencyArray)
+            }
         } catch {
             delegate?.didFailWithError(error: error)
         }
