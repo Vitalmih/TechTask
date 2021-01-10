@@ -38,7 +38,7 @@ class CurrenciesViewController: UIViewController {
 
 //MARK: - CurrencyNetworkManagerDelegate
 extension CurrenciesViewController: CurrencyNetworkManagerDelegate {
-   
+    
     func didGetCurrency(currencies: [CurrencyDataModel]) {
         self.currenciesArray = currencies
         let requiredCur = self.requiredCurrencies.map { $0.rawValue.uppercased() }
@@ -49,18 +49,16 @@ extension CurrenciesViewController: CurrencyNetworkManagerDelegate {
     
     func didFailWithError(error: Error) {
         let alert = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "Cancel", style: .destructive, handler: nil))
-        DispatchQueue.main.async {
-            self.present(alert, animated: true, completion: nil)
-            self.converterButton.isHighlighted = true
-            self.converterButton.isEnabled = false
-        }
+        alert.addAction(UIAlertAction(title: "Ok", style: .destructive, handler: nil))
+        self.present(alert, animated: true, completion: nil)
+        self.converterButton.isHighlighted = true
+        self.converterButton.isEnabled = false
     }
 }
 
 //MARK: - TableViewDataSource and Delegate
 extension CurrenciesViewController: UITableViewDataSource {
-  
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         currenciesArrayForCurrenciesScreen.count
     }

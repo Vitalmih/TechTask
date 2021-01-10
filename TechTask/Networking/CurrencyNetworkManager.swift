@@ -56,7 +56,9 @@ class CurrencyNetworkManager: CurrencyNetworkManagerProtocol {
                 self.delegate?.didGetCurrency(currencies: currencyArray)
             }
         } catch {
-            delegate?.didFailWithError(error: error)
+            DispatchQueue.main.async {
+                self.delegate?.didFailWithError(error: error)
+            }
         }
     }
 }

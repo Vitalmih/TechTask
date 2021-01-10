@@ -103,13 +103,12 @@ extension ConverterViewController: UIPickerViewDelegate {
 extension ConverterViewController: UITextFieldDelegate {
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        if let count = textField.text?.count {
-            if count >= 10 {
-                return false
-            }
+        if let count = textField.text?.count, count >= 10 {
+            return false
+        } else {
+            calculateCurrencyRate(textField: textField)
+            return true
         }
-        calculateCurrencyRate(textField: textField)
-        return true
     }
 }
 
