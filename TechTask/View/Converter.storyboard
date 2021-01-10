@@ -20,9 +20,9 @@
                                 <rect key="frame" x="20" y="372" width="374" height="40"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="AUD" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xJT-Pu-wYp">
-                                        <rect key="frame" x="0.0" y="0.0" width="35" height="40"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="45" height="40"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="35" id="a0F-md-ZUf"/>
+                                            <constraint firstAttribute="width" constant="45" id="VTe-pf-szV"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
@@ -63,7 +63,10 @@
                                 <rect key="frame" x="20" y="54" width="374" height="40"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="AUD" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="s99-cz-qr4">
-                                        <rect key="frame" x="0.0" y="0.0" width="35" height="40"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="45" height="40"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="45" id="Nwx-12-d39"/>
+                                        </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>

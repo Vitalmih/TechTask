@@ -15,6 +15,7 @@ enum Currency: String {
 class CurrenciesViewController: UIViewController {
     
     @IBOutlet weak var currencyTableView: UITableView!
+    @IBOutlet weak var converterButton: UIButton!
     
     var networkManager: CurrencyNetworkManagerProtocol?
     var currenciesArrayForCurrenciesScreen: [CurrencyDataModel] = []
@@ -37,6 +38,7 @@ class CurrenciesViewController: UIViewController {
 
 //MARK: - CurrencyNetworkManagerDelegate
 extension CurrenciesViewController: CurrencyNetworkManagerDelegate {
+   
     func didGetCurrency(currencies: [CurrencyDataModel]) {
         self.currenciesArray = currencies
         let requiredCur = self.requiredCurrencies.map { $0.rawValue.uppercased() }
@@ -46,13 +48,19 @@ extension CurrenciesViewController: CurrencyNetworkManagerDelegate {
     }
     
     func didFailWithError(error: Error) {
-        print(error)
-        // Alert
+        let alert = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Cancel", style: .destructive, handler: nil))
+        DispatchQueue.main.async {
+            self.present(alert, animated: true, completion: nil)
+            self.converterButton.isHighlighted = true
+            self.converterButton.isEnabled = false
+        }
     }
 }
 
 //MARK: - TableViewDataSource and Delegate
 extension CurrenciesViewController: UITableViewDataSource {
+  
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         currenciesArrayForCurrenciesScreen.count
     }

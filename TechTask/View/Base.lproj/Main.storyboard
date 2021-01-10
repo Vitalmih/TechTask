@@ -90,6 +90,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="FkM-yP-vtf"/>
                     <connections>
+                        <outlet property="converterButton" destination="0tc-2f-efi" id="cL8-oB-Bhz"/>
                         <outlet property="currencyTableView" destination="4hK-3g-fxd" id="iNh-GY-A2m"/>
                     </connections>
                 </viewController>

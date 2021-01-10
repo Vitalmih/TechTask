@@ -27,13 +27,14 @@ class ConverterViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        currencyPicker.selectRow(1, inComponent: 1, animated: true)
-        currencyPicker.delegate?.pickerView?(currencyPicker, didSelectRow: 1, inComponent: 1)
+        self.currencyPicker.selectRow(1, inComponent: 1, animated: true)
+        self.currencyPicker.delegate?.pickerView?(self.currencyPicker, didSelectRow: 1, inComponent: 1)
     }
 }
 
 //MARK: - UIPickerViewDataSource
 extension ConverterViewController: UIPickerViewDataSource {
+    
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 2
     }
@@ -45,6 +46,7 @@ extension ConverterViewController: UIPickerViewDataSource {
 
 //MARK: - UIPickerViewDelegate
 extension ConverterViewController: UIPickerViewDelegate {
+    
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         let CurrencyCode = currenciesArray[row]
         switch component {
@@ -99,8 +101,8 @@ extension ConverterViewController: UIPickerViewDelegate {
 
 //MARK: - UITextFieldDelegate
 extension ConverterViewController: UITextFieldDelegate {
+    
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        
         if let count = textField.text?.count {
             if count >= 10 {
                 return false
@@ -113,11 +115,13 @@ extension ConverterViewController: UITextFieldDelegate {
 
 //MARK: - Hide keyboard
 extension UIViewController {
+    
     func hideKeyboardWhenTappedAround() {
         let tap = UITapGestureRecognizer(target: self, action: #selector(UIViewController.dismissKeyboard))
         tap.cancelsTouchesInView = false
         view.addGestureRecognizer(tap)
     }
+    
     @objc func dismissKeyboard() {
         view.endEditing(true)
     }
