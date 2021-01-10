@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -13,11 +12,11 @@
             <objects>
                 <viewController storyboardIdentifier="Converter" modalPresentationStyle="fullScreen" useStoryboardIdentifierAsRestorationIdentifier="YES" id="9lM-yD-iR0" customClass="ConverterViewController" customModule="TechTask" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Y6p-vM-ig9">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AsW-8h-8nF">
-                                <rect key="frame" x="20" y="372" width="374" height="40"/>
+                                <rect key="frame" x="20" y="110" width="560" height="40"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="AUD" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xJT-Pu-wYp">
                                         <rect key="frame" x="0.0" y="0.0" width="45" height="40"/>
@@ -29,7 +28,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" textAlignment="center" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="C8j-ND-XYH">
-                                        <rect key="frame" x="304" y="3" width="70" height="34"/>
+                                        <rect key="frame" x="314" y="3" width="246" height="34"/>
                                         <constraints>
                                             <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="70" id="L7v-83-tH5"/>
                                         </constraints>
@@ -53,14 +52,14 @@
                                 </constraints>
                             </view>
                             <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Sjz-R2-3PD">
-                                <rect key="frame" x="0.0" y="114" width="414" height="253"/>
+                                <rect key="frame" x="0.0" y="70" width="600" height="35"/>
                                 <connections>
                                     <outlet property="dataSource" destination="9lM-yD-iR0" id="9Oy-Z1-ujI"/>
                                     <outlet property="delegate" destination="9lM-yD-iR0" id="rs5-kN-BhZ"/>
                                 </connections>
                             </pickerView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vEj-3q-wmG">
-                                <rect key="frame" x="20" y="54" width="374" height="40"/>
+                                <rect key="frame" x="20" y="10" width="560" height="40"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="AUD" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="s99-cz-qr4">
                                         <rect key="frame" x="0.0" y="0.0" width="45" height="40"/>
@@ -72,7 +71,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="khD-JZ-Y6G">
-                                        <rect key="frame" x="304" y="3" width="70" height="34"/>
+                                        <rect key="frame" x="314" y="3" width="246" height="34"/>
                                         <constraints>
                                             <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="70" id="sd7-Zm-NHL"/>
                                         </constraints>
@@ -115,8 +114,8 @@
                         <outlet property="convertedCurrencyType" destination="xJT-Pu-wYp" id="BJq-Jx-Ugf"/>
                         <outlet property="currencyPicker" destination="Sjz-R2-3PD" id="heP-1Q-k9s"/>
                         <outlet property="currencyType" destination="s99-cz-qr4" id="hOq-4z-V9t"/>
-                        <outlet property="multiplicityCurrencyTF" destination="khD-JZ-Y6G" id="mys-v2-wWX"/>
-                        <outlet property="resultCurrencyTF" destination="C8j-ND-XYH" id="HJq-66-E39"/>
+                        <outlet property="lowerCurrencyTF" destination="C8j-ND-XYH" id="HJq-66-E39"/>
+                        <outlet property="upperCurrencyTF" destination="khD-JZ-Y6G" id="mys-v2-wWX"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sg7-LG-gKV" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

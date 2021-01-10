@@ -12,8 +12,8 @@ class ConverterViewController: UIViewController {
     @IBOutlet weak var currencyType: UILabel!
     @IBOutlet weak var convertedCurrencyType: UILabel!
     @IBOutlet weak var currencyPicker: UIPickerView!
-    @IBOutlet weak var multiplicityCurrencyTF: UITextField!
-    @IBOutlet weak var resultCurrencyTF: UITextField!
+    @IBOutlet weak var upperCurrencyTF: UITextField!
+    @IBOutlet weak var lowerCurrencyTF: UITextField!
     
     var currenciesArray: [CurrencyDataModel] = []
     
@@ -62,7 +62,7 @@ extension ConverterViewController: UIPickerViewDelegate {
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         let selectedInputField = component == 0 ? currencyType : convertedCurrencyType
-        let requiredTextField: UITextField = component == 0 ? multiplicityCurrencyTF : resultCurrencyTF
+        let requiredTextField: UITextField = component == 0 ? upperCurrencyTF : lowerCurrencyTF
         
         if pickerView.selectedRow(inComponent: 0) == pickerView.selectedRow(inComponent: 1) {
             if currenciesArray[row].validCode == currenciesArray[row].validCode && row == 0 {
@@ -77,23 +77,23 @@ extension ConverterViewController: UIPickerViewDelegate {
     }
     
     func calculateCurrencyRate(textField: UITextField) {
-        if textField == multiplicityCurrencyTF {
-            if multiplicityCurrencyTF.text != "" && currencyType.text != convertedCurrencyType.text {
-                guard let numberString = multiplicityCurrencyTF.text else { return }
+        if textField == upperCurrencyTF {
+            if upperCurrencyTF.text != "" && currencyType.text != convertedCurrencyType.text {
+                guard let numberString = upperCurrencyTF.text else { return }
                 let convertNumberStringToDouble = Double(numberString) ?? 0.0
                 let buffer = convertNumberStringToDouble * self.leftComponentRate
                 let totalNumber = buffer / rightComponentRate
                 let formatedTotalNumberString = String(format: "%.2f", totalNumber)
-                resultCurrencyTF.text = formatedTotalNumberString
+                lowerCurrencyTF.text = formatedTotalNumberString
             }
-        } else if textField == resultCurrencyTF {
-            if resultCurrencyTF.text != "" && currencyType.text != convertedCurrencyType.text {
-                guard let numberString = resultCurrencyTF.text else { return }
+        } else if textField == lowerCurrencyTF {
+            if lowerCurrencyTF.text != "" && currencyType.text != convertedCurrencyType.text {
+                guard let numberString = lowerCurrencyTF.text else { return }
                 let convertNumberStringToDouble = Double(numberString) ?? 0.0
                 let buffer = convertNumberStringToDouble * self.rightComponentRate
                 let totalNumber = buffer / leftComponentRate
                 let formatedTotalNumberString = String(format: "%.2f", totalNumber)
-                multiplicityCurrencyTF.text = formatedTotalNumberString
+                upperCurrencyTF.text = formatedTotalNumberString
             }
         }
     }
